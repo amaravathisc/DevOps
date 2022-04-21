@@ -1,0 +1,152 @@
+What is Docker?
+
+Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can 
+deliver software quickly. With Docker, you can manage your infrastructure in the same ways you manage your applications. By taking advantage of Docker’s methodologies
+for shipping, testing, and deploying code quickly, you can significantly reduce the delay between writing code and running it in production.
+
+To work in standardized environments using local containers which provide your applications and services. Containers are great for continuous integration and continuous delivery (CI/CD) workflows.
+For Example
+Developers write code locally and share their work with their colleagues using Docker containers. 
+They use Docker to push their applications into a test environment and execute automated and manual tests.
+When developers find bugs, they can fix them in the development environment and redeploy them to the test environment for testing and validation.
+When testing is complete, getting the fix to the customer is as simple as pushing the updated image to the production environment.
+
+Docker objects
+When you use Docker, you are creating and using images, containers, networks, volumes, plugins, and other objects.
+
+Images
+An image is a read-only template with instructions for creating a Docker container. Often, an image is based on another image, with some additional customization.
+
+Containers
+A container is a runnable instance of an image. You can create, start, stop, move, or delete a container using the Docker API or CLI. You can connect a container 
+to one or more networks, attach storage to it, or even create a new image based on its current state.
+
+
+Docker Commands
+
+docker –version  --> This command is used to get the currently installed version of docker
+
+docker pull
+docker pull <image name>  --> This command is used to pull images from the docker repository
+
+docker run
+docker run -it -d <image name> --> This command is used to create a container from an image
+
+docker ps --> This command is used to list the running containers
+docker ps -a --> This command is used to show all the running and exited containers
+
+docker exec
+docker exec -it <container id> bash --> This command is used to access the running container
+
+docker stop
+docker stop <container id> --> This command stops a running container
+
+docker kill
+docker kill <container id> --> This command kills the container by stopping its execution immediately.‘docker stop’ gives the container time to shutdown gracefully.
+
+docker commit
+docker commit <conatainer id> <username/imagename> --> This command creates a new image of an edited container on the local system
+
+docker login --> This command is used to login to the docker hub repository
+
+docker push
+docker push <username/image name> --> This command is used to push an image to the docker hub repository
+
+docker images --> This command lists all the locally stored docker images
+
+docker rm
+docker rm <container id> --> This command is used to delete a stopped container
+
+docker rmi
+docker rmi <image-id> --> This command is used to delete an image from local storage
+
+docker build
+docker build <path to docker file> --> This command is used to build an image from a specified docker file
+
+
+Dockerfile Commands
+
+1) FROM
+
+Use current official images as the basis for your images
+
+2) LABEL
+
+We can add labels to your image to help organize images by project, to aid in automation, or for other reasons.
+
+3) RUN
+
+RUN statements on multiple lines separated with backslashes to make your Dockerfile more readable, understandable, and maintainable.
+
+4) CMD 
+
+This command is used to execute a command at runtime when the container is executed.
+
+Syntax
+CMD command param1 
+
+5) EXPOSE
+
+The EXPOSE instruction indicates the ports on which a container listens for connections. Consequently, you should use the common, traditional port for your application.
+
+6) ENTRYPOINT
+
+This command can also be used to execute commands at runtime for the container. But we can be more flexible with the ENTRYPOINT command.
+
+Syntax
+ENTRYPOINT command param1 
+
+7) ENV
+This command is used to set environment variables in the container.
+
+Syntax
+ENV key value 
+
+8) WORKDIR
+This command is used to set the working directory of the container.
+
+Syntax
+WORKDIR dirname 
+
+9) MAINTAINER
+
+The LABEL instruction is a much more flexible version of this and you should use it instead, as it enables setting any metadata you require, and can be viewed easily
+
+10)ADD or COPY
+
+ADD and COPY are functionally similar, generally speaking, COPY is preferred. That’s because it’s more transparent than ADD.
+COPY only supports the basic copying of local files into the container, while ADD has some features (like local-only tar extraction and remote URL support)
+
+11)VOLUME
+
+The VOLUME instruction should be used to expose any database storage area, configuration storage, or files/folders created by your docker container.
+You are strongly encouraged to use VOLUME for any mutable and/or user-serviceable parts of your image.
+
+12)USER
+
+If a service can run without privileges, use USER to change to a non-root user. Start by creating the user and group in the Dockerfile
+
+13)ARG
+
+The ARG instruction defines a variable that users can pass at build-time to the builder with the docker build command using the --build-arg <varname>=<value> flag. If a user specifies a build argument that was not defined in the Dockerfile, the build outputs a warning.
+
+14)ONBUILD
+
+The ONBUILD instruction adds to the image a trigger instruction to be executed at a later time, when the image is used as the base for another build.
+
+ONBUILD <INSTRUCTION>
+
+15)STOPSIGNAL
+
+The STOPSIGNAL instruction sets the system call signal that will be sent to the container to exit. This signal can be a signal name in the format SIG<NAME>
+
+STOPSIGNAL signal
+
+16)HEALTHCHECK
+
+The HEALTHCHECK instruction tells Docker how to test a container to check that it is still working. This can detect cases such as a web server that is stuck
+in an infinite loop and unable to handle new connections, even though the server process is still running.
+
+17)SHELL
+
+The SHELL instruction allows the default shell used for the shell form of commands to be overridden.
